@@ -83,33 +83,6 @@ Calculating sentiment flow can be useful for several reasons, even if the text h
 
 In summary, even if sentiments have already been labeled, sentiment flow provides an additional dimension of analysis beyond simple labeling, offering a more dynamic and interactive view of sentiments within a dataset.
 
-### Conceptual Mapping
-
-1. **Velocity ($\vec{u}$)**: This could represent the "speed" at which a sentiment is propagating through the text. For example, a rapid shift from positive to negative sentiment could be considered a high "velocity."
-2. **Time ($t$)**: This remains as the position of a sentence or word in the text, serving as a temporal marker.
-3. **Density ($\rho$)**: This could represent the "density" of specific sentiments in a given section of text. A paragraph filled with positive words would have a high "density" of positive sentiment.
-4. **Pressure ($p$)**: This could be analogous to the intensity of a sentiment. Stronger words ("love," "hate") exert more "pressure" than weaker ones ("like," "dislike").
-5. **Viscosity ($\nu$)**: This could represent the resistance to the flow of sentiment, perhaps due to the complexity or ambiguity of the text.
-6. **External Force ($\vec{g}$)**: This could be external factors like cultural context or the influence of preceding text segments.
-
-### Modified Equation
-
-A modified Navier-Stokes equation for sentiment flow ($\vec{s}$) could look something like:
-
-$$
-\frac{\partial \vec{s}}{\partial t} + (\vec{s} \cdot \nabla) \vec{s} = -\frac{1}{\rho_{\text{sent}}} \nabla p_{\text{sent}} + \nu_{\text{sent}} \nabla^2 \vec{s} + \vec{g}_{\text{context}}
-$$
-
-Here, $\rho_{\text{sent}}$, $p_{\text{sent}}$, and $\nu_{\text{sent}}$ are the density, pressure, and viscosity of sentiment, respectively, and $\vec{g}_{\text{context}}$ is the external contextual force.
-
-### Computational Implementation
-
-1. **Discretization**: The text would be discretized into segments (e.g., sentences or paragraphs), and the sentiment in each would be quantified to serve as initial conditions.
-2. **Numerical Methods**: Techniques like finite difference or finite element methods could be used to solve the modified equation computically.
-3. **Boundary Conditions**: These would need to be set based on the text. For example, the sentiment at the beginning and end of the text could serve as boundary conditions.
-
-By adapting the Navier-Stokes equations in this way, you could create a computational model to simulate how sentiment flows through a text, allowing for more nuanced analyses that take into account both the internal dynamics of the text and external influences.
-
 Selecting the IMDb Reviews dataset is a strategic choice for studying Sentiment Flow. Here's a step-by-step guide on how to proceed with the experiment:
 
 ### Phase 1: Data Preparation
