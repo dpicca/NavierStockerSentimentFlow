@@ -1,0 +1,232 @@
+Speaker,Initial Speech,Initial Sentiment,Initial POLARITY
+BERNARDO,Who's there?,"[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0.]",0.0
+FRANCISCO,"Nay, answer me: stand, and unfold yourself.","[ 0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.893  0.     0.    -0.993  0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.318  0.   ]",0.2685
+HORATIO,Friends to this ground.,"[0.    0.    0.    0.    0.    0.    0.    0.    0.659 0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]",0.659
+MARCELLUS,And liegemen to the Dane.,"[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0.]",0.0
+KING CLAUDIUS,"Though yet of Hamlet our dear brother's death The memory be green, and that it us befitted To bear our hearts in grief and our whole kingdom To be contracted in one brow of woe, Yet so far hath discretion fought with nature That we with wisest sorrow think on him, Together with remembrance of ourselves. Therefore our sometime sister, now our queen, The imperial jointress to this warlike state, Have we, as 'twere with a defeated joy,-- With an auspicious and a dropping eye, With mirth in funeral and with dirge in marriage, In equal scale weighing delight and dole,-- Taken to wife: nor have we herein barr'd Your better wisdoms, which have freely gone With this affair along. For all, our thanks. Now follows, that you know, young Fortinbras, Holding a weak supposal of our worth, Or thinking by our late dear brother's death Our state to be disjoint and out of frame, Colleagued with the dream of his advantage, He hath not fail'd to pester us with message, Importing the surrender of those lands Lost by his father, with all bonds of law, To our most valiant brother. So much for him. Now for ourself and for this time of meeting: Thus much the business is: we have here writ To Norway, uncle of young Fortinbras,-- Who, impotent and bed-rid, scarcely hears Of this his nephew's purpose,--to suppress His further gait herein; in that the levies, The lists and full proportions, are all made Out of his subject: and we here dispatch You, good Cornelius, and you, Voltimand, For bearers of this greeting to old Norway; Giving to you no further personal power To business with the king, more than the scope Of these delated articles allow. Farewell, and let your haste commend your duty.","[-0.32625     0.2995      0.          0.          0.93625     0.
+  0.          0.          0.6275      0.          0.          0.
+  0.48        0.         -0.21354167  0.          0.          0.
+  0.          0.         -0.43933333 -0.0475      0.9086     -0.35266667
+  0.5385     -0.93816667  0.          0.          0.          0.
+ -0.661       0.          0.          0.          0.          0.
+ -0.186       0.605       0.9315     -0.9384      0.          0.
+ -0.513       0.          0.          0.8635      0.          0.
+ -0.657      -0.328       0.          0.          0.793       0.
+  0.          0.27828571  0.        ]",0.0863932584269663
+CORNELIUS,In that and all things will we show our duty.,"[ 0.      0.27    0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.     -0.9245  0.      0.      0.      0.      0.
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.    ]",-0.47633333333333333
+LAERTES,"My dread lord, Your leave and favour to return to France; From whence though willingly I came to Denmark, To show my duty in your coronation, Yet now, I must confess, that duty done, My thoughts and wishes bend again toward France And bow them to your gracious leave and pardon.","[-0.234   0.27    0.      0.      0.      0.      0.      0.      0.659
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.      0.      0.9445  0.      0.      0.      0.
+  0.      0.      0.     -0.474   0.      0.      0.      0.      0.
+  0.      0.659   0.965  -0.854   0.      0.      0.      0.      0.
+  0.844   0.      0.      0.      0.     -0.571   0.      0.      0.
+  0.      0.2195  0.    ]",0.20313333333333333
+LORD POLONIUS,"He hath, my lord, wrung from me my slow leave By laboursome petition, and at last Upon his will I seal'd my hard consent: I do beseech you, give him leave to go.","[-0.539       0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.         -0.51633333  0.          0.983       0.
+  0.         -0.831       0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.209       0.
+ -0.254       0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.        ]",-0.28712499999999996
+HAMLET,,"[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0.]",0.0
+QUEEN GERTRUDE,"Good Hamlet, cast thy nighted colour off, And let thine eye look like a friend on Denmark. Do not for ever with thy vailed lids Seek for thy noble father in the dust: Thou know'st 'tis common; all that lives must die, Passing through nature to eternity.","[-0.256       0.          0.          0.          0.          0.
+  0.          0.          0.659       0.          0.          0.
+  0.          0.         -0.1724      0.          0.          0.
+  0.          0.         -0.855       0.          0.9315     -0.599
+  0.          0.          0.          0.          0.         -0.30933333
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.         -0.9535      0.298       0.
+  0.          0.          0.          0.837       0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.304       0.        ]",-0.04946666666666663
+All,Our duty to your honour.,"[0.    0.27  0.    0.    0.    0.    0.    0.    0.521 0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]",0.3955
+OPHELIA,Do you doubt that?,"[ 0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+ -0.329  0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.   ]",-0.329
+Ghost,Mark me.,"[0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.867 0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]",0.841
+REYNALDO,"I will, my lord.","[0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.983 0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]",0.722
+ROSENCRANTZ,"Both your majesties Might, by the sovereign power you have of us, Put your dread pleasures more into command Than to entreaty.","[ 0.      0.      0.      0.      0.888   0.      0.      0.      0.659
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.      0.      0.9025  0.      0.      0.      0.
+  0.      0.      0.     -0.659   0.      0.      0.      0.      0.
+  0.      0.      0.986   0.      0.      0.      0.      0.      0.
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.241   0.    ]",0.6018888888888889
+GUILDENSTERN,"But we both obey, And here give up ourselves, in the full bent To lay our service freely at your feet, To be commanded.","[ 0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.321
+  0.     0.     0.94   0.     0.56   0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.986  0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+ -0.619  0.     0.     0.     0.     0.     0.   ]",0.4745
+VOLTIMAND,"Most fair return of greetings and desires. Upon our first, he sent out to suppress His nephew's levies; which to him appear'd To be a preparation 'gainst the Polack; But, better look'd into, he truly found It was against your highness: whereat grieved, That so his sickness, age and impotence Was falsely borne in hand, sends out arrests On Fortinbras; which he, in brief, obeys; Receives rebuke from Norway, and in fine Makes vow before his uncle never more To give the assay of arms against your majesty. Whereon old Norway, overcome with joy, Gives him three thousand crowns in annual fee, And his commission to employ those soldiers, So levied as before, against the Polack: With an entreaty, herein further shown, That it might please you to give quiet pass Through your dominions for this enterprise, On such regards of safety and allowance As therein are set down.","[-0.37133333  0.329       0.          0.          0.868       0.
+  0.          0.          0.61066667  0.          0.          0.
+  0.474       0.         -0.14671429  0.          0.          0.
+  0.          0.321      -0.4275      0.          0.91166667 -0.307
+  0.66       -0.9112      0.          0.          0.          0.
+ -0.621       0.          0.          0.          0.          0.
+  0.          0.          0.8845     -0.846       0.          0.
+ -0.333       0.          0.          0.977       0.          0.
+  0.          0.          0.          0.          0.          0.
+ -0.299       0.263       0.        ]",0.06472222222222222
+First Player,"What speech, my lord?","[0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.983 0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]",0.722
+Prologue,"For us, and for our tragedy, Here stooping to your clemency, We beg your hearing patiently.","[ 0.     0.227  0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+ -0.935  0.     0.     0.     0.     0.     0.     0.     0.     0.
+ -0.826  0.     0.     0.     0.     0.     0.     0.     0.    -0.952
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.329  0.   ]",-0.3666
+Player King,"Full thirty times hath Phoebus' cart gone round Neptune's salt wash and Tellus' orbed ground, And thirty dozen moons with borrow'd sheen About the world have times twelve thirties been, Since love our hearts and Hymen did our hands Unite commutual in most sacred bands.","[-0.313   0.      0.      0.      0.      0.      0.793   0.      0.
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.     -0.659   0.      0.9072 -0.567   0.588  -0.972   0.
+  0.      0.      0.     -0.826   0.      0.      0.      0.      0.
+  0.      0.      0.9375  0.      0.      0.     -0.1435  0.      0.
+  0.      0.      0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.    ]",0.338
+Player Queen,"So many journeys may the sun and moon Make us again count o'er ere love be done! But, woe is me, you are so sick of late, So far from cheer and from your former state, That I distrust you. Yet, though I distrust, Discomfort you, my lord, it nothing must: For women's fear and love holds quantity; In neither aught, or in extremity. Now, what my love is, proof hath made you know; And as my love is sized, my fear is so: Where love is great, the littlest doubts are fear; Where little fears grow great, great love grows there.","[-0.4174      0.          0.          0.          0.999       0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.         -0.14271429  0.          0.          0.
+  0.          0.         -0.21966667  0.          0.956      -0.1228
+  0.659      -0.8825      0.          0.          0.          0.
+ -0.5938      0.          0.          0.          0.          0.
+  0.          0.          0.9805     -0.908       0.          0.
+ -0.1645      0.          0.          0.915       0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.244       0.        ]",0.11102857142857143
+LUCIANUS,"Thoughts black, hands apt, drugs fit, and time agreeing; Confederate season, else no creature seeing; Thou mixture rank, of midnight weeds collected, With Hecate's ban thrice blasted, thrice infected, Thy natural magic and dire property, On wholesome life usurp immediately.","[ 0.          0.          0.          0.          0.993       0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.212       0.          0.          0.92166667 -0.2885
+  0.         -0.96        0.          0.          0.          0.
+ -0.385       0.          0.          0.          0.          0.
+ -0.306       0.          0.87       -0.92533333  0.329       0.
+ -0.56866667  0.          0.          0.837       0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.282       0.        ]",-0.013800000000000002
+PRINCE FORTINBRAS,"Go, captain, from me greet the Danish king; Tell him that, by his licence, Fortinbras Craves the conveyance of a promised march Over his kingdom. You know the rendezvous. If that his majesty would aught with us, We shall express our duty in his eye; And let him know so.","[ 0.          0.27        0.         -0.585       0.888       0.
+  0.          0.          0.536       0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.9015      0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.90133333 -0.9125      0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.        ]",0.43676923076923074
+Captain,"I will do't, my lord.","[0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.983 0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]",0.722
+Gentleman,"She is importunate, indeed distract: Her mood will needs be pitied.","[ 0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.159  0.     0.     0.    -0.659  0.     0.     0.     0.
+  0.     0.     0.     0.     0.    -0.961  0.     0.    -0.464  0.
+ -0.329  0.     0.     0.     0.     0.     0.     0.     0.    -0.907
+  0.     0.    -0.212  0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.   ]",-0.47300000000000003
+Danes,"No, let's come in.","[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0.]",0.0
+Servant,"Sailors, sir: they say they have letters for you.","[0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.921 0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.573 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]",0.7663333333333333
+First Sailor,"God bless you, sir.","[0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.897 0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.999 0.    0.
+ 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]",0.9053333333333334
+Messenger,"Letters, my lord, from Hamlet: This to your majesty; this to the queen.","[ 0.     0.     0.     0.     0.888  0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.979  0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.    -0.912
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.25   0.   ]",0.37560000000000004
+First Clown,Is she to be buried in Christian burial that wilfully seeks her own salvation?,"[-0.329  0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.887 -0.652  0.    -0.851 -0.827  0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.   ]",-0.33580000000000004
+Second Clown,"I tell thee she is: and therefore make her grave straight: the crowner hath sat on her, and finds it Christian burial.","[ 0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+ -0.659  0.     0.879 -0.652  0.    -0.903  0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.858  0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.   ]",-0.2948571428571429
+First Priest,"Her obsequies have been as far enlarged As we have warrantise: her death was doubtful; And, but that great command o'ersways the order, She should in ground unsanctified have lodged Till the last trumpet: for charitable prayers, Shards, flints and pebbles should be thrown on her; Yet here she is allow'd her virgin crants, Her maiden strewments and the bringing home Of bell and burial.","[ 0.          0.          0.          0.          0.999       0.
+  0.          0.          0.659       0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.291      -0.6         0.          0.88375     0.
+  0.         -0.8465      0.          0.          0.          0.
+ -0.6185      0.45        0.          0.          0.          0.
+  0.          0.          0.986      -0.87233333  0.          0.
+  0.          0.          0.          0.981       0.61        0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.227       0.        ]",0.033
+OSRIC,Your lordship is right welcome back to Denmark.,"[ 0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.835 -0.503  0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.     0.     0.     0.
+  0.     0.     0.     0.     0.     0.     0.   ]",0.38966666666666666
+Lord,"My lord, his majesty commended him to you by young Osric, who brings back to him that you attend him in the hall: he sends to know if your pleasure hold to play with Laertes, or that you will take longer time.","[ 0.          0.          0.          0.          0.888       0.
+  0.          0.          0.656       0.          0.          0.
+  0.          0.         -0.10966667  0.          0.          0.
+  0.          0.          0.          0.          0.891       0.
+  0.659      -0.885       0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+ -0.4795      0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.227       0.        ]",0.31254545454545457
+First Ambassador,"The sight is dismal; And our affairs from England come too late: The ears are senseless that should give us hearing, To tell him his commandment is fulfill'd, That Rosencrantz and Guildenstern are dead: Where should we have our thanks?","[-0.224   0.329   0.      0.      0.      0.      0.      0.      0.
+  0.      0.      0.      0.      0.     -0.1645  0.      0.      0.
+  0.      0.      0.      0.      0.     -0.565   0.     -0.874   0.
+  0.      0.      0.     -0.329   0.      0.      0.      0.      0.
+ -0.228   0.      0.986  -0.856   0.      0.      0.      0.      0.
+  0.      0.      0.     -0.657   0.      0.      0.      0.      0.
+  0.      0.      0.    ]",-0.3059090909090909
