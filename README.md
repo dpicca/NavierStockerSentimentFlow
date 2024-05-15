@@ -1,3 +1,5 @@
+This is the experiment branch
+
 Modifying the Navier-Stokes equations for text analysis is a challenging task that requires a deep understanding of both fluid dynamics and natural language processing. The Navier-Stokes equations describe how the velocity field of a fluid evolves over time and are given by:
 
 The intersection of fluid dynamics and text analysis presents a fascinating fusion of physics and linguistics, one that may seem unconventional at first glance. Fluid dynamics, a branch of physics with a focus on how fluids behave and interact with various forces, is governed by the Navier-Stokes equations. These equations, which are central to the field, provide a mathematical model for the motion of fluid substances.
@@ -161,7 +163,6 @@ Selecting the IMDb Reviews dataset is a strategic choice for studying Sentiment 
 By following this structured approach, you can systematically explore the concept of Sentiment Flow in movie reviews, potentially uncovering new insights into how sentiment evolves and propagates in text.
 
 ## Possible improvements
-
 
 Here are some suggestions for further enhancing the experiment:
 
