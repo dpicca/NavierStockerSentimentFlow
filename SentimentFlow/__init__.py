@@ -1,0 +1,4 @@
+from .data_processing import parse_xml_to_dataframe, process_speeches
+from .sentiment_analysis import calculate_sentiment_density, calculate_sentiment_pressure, calculate_sentiment_viscosity, calculate_external_contextual_force, calculate_navier_stocker
+from .plotting import plot_speaker_simulations, plot_highest_avg_dimension
+from .utils import normalize_data, save_all_s_to_csv
