@@ -11,28 +11,17 @@ import spacy
 nlp = spacy.load("en_core_web_sm")
 
 
-def parse_xml_to_dataframe(file_path):
-    # Parse the XML file
-    tree = ET.parse(file_path)
-    root = tree.getroot()
-
-    # Extracting play title
-    play_title = root.find('TITLE').text
-
-    # Extracting speaker and speech
-    data = []
-    for speech in root.iter('SPEECH'):
-        speaker = speech.find('SPEAKER').text
-        lines = [line.text for line in speech.findall('LINE') if line.text]
-        speech_text = ' '.join(lines)
-        data.append({'title': play_title, 'speaker': speaker, 'speech': speech_text})
-
-    # Creating DataFrame
-    df = pd.DataFrame(data, columns=['title', 'speaker', 'speech'])
-    return df
 
 
-def process_speeches(input_df, senticnet_path):
+
+def process_speeches(input_df: pd.DataFrame, senticnet_path: str) -> pd.DataFrame:
+    """
+    Process the speeches in the input dataframe and extract the emotions and polarity using SenticNet.
+
+    :param input_df: The input dataframe containing the speeches. Columns should include 'title', 'speaker', and 'speech'.
+    :param senticnet_path: The path to the SenticNet data.
+    :return: A dataframe containing the processed speeches.
+    """
     senticnet_data = pd.read_csv(senticnet_path, delimiter="\t")
     categories = ['INTROSPECTION', 'TEMPER', 'ATTITUDE', 'SENSITIVITY']
 

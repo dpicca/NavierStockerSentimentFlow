@@ -4,7 +4,7 @@ from tqdm.notebook import tqdm
 import logging
 
 
-def calculate_sentiment_density(sentiment_scores):
+def calculate_sentiment_density(sentiment_scores: np.ndarray):
     return np.sum(np.abs(sentiment_scores))
 
 
@@ -94,7 +94,6 @@ def calculate_navier_stocker(data):
 
             for sim_result in s.tolist():
                 all_results.append((sim_result, current_speech))
-            unique_all_results = remove_duplicates(all_results)
 
             s0 = s[-1]
             current_time += 1

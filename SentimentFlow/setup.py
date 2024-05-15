@@ -8,7 +8,6 @@ setup(
         'spacy',
         'textblob',
         'spacytextblob',
-        'ipywidgets',
         'tqdm',
         'numpy',
         'pandas',
@@ -26,7 +25,7 @@ setup(
     author="Your Name",
     author_email="your.email@example.com",
     description="A package for processing and analyzing sentiment flow in speeches using principles from fluid dynamics.",
-    url="https://github.com/yourusername/sentimentflow",
+    url="https://github.com/unil-ish/sentimentflow",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
