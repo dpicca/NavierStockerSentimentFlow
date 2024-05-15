@@ -1,11 +1,11 @@
 import unittest
 import numpy as np
-from mypackage.sentiment_analysis import calculate_sentiment_density, calculate_sentiment_pressure, calculate_sentiment_viscosity, calculate_external_contextual_force
 
+from SentimentFlow.sentiment_analysis import _calculate_sentiment_density, calculate_sentiment_pressure, calculate_sentiment_viscosity, calculate_external_contextual_force
 class TestSentimentAnalysis(unittest.TestCase):
     def test_calculate_sentiment_density(self):
         scores = [0.1, 0.2, 0.3, 0.4]
-        density = calculate_sentiment_density(scores)
+        density = _calculate_sentiment_density(scores)
         self.assertAlmostEqual(density, 1.0)
 
     def test_calculate_sentiment_pressure(self):

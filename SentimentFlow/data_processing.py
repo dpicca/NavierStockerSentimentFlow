@@ -1,81 +1,174 @@
-import os
-import glob
 import pandas as pd
-import xml.etree.ElementTree as ET
 from pathlib import Path
 from tqdm.notebook import tqdm
-import logging
 import spacy
 
 # Load the English tokenizer, POS tagger, parser, NER, and word vectors
 nlp = spacy.load("en_core_web_sm")
 
+class SpeechProcessor:
+    def __init__(self, senticnet_path: str):
+        """
+        Initialize the SpeechProcessor.
 
+        Args:
+            senticnet_path (str): The path to the SenticNet data.
+        """
+        self.senticnet_path = senticnet_path
+        self.senticnet_data = pd.read_csv(senticnet_path, delimiter="\t")
+        self.categories = ['INTROSPECTION', 'TEMPER', 'ATTITUDE', 'SENSITIVITY']
 
+    def process_speeches(self, input_df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Process the speeches in the input dataframe and extract the emotions and polarity using SenticNet.
 
+        Args:
+            input_df (pd.DataFrame): The input dataframe containing the speeches. Columns should include 'title', 'speaker', and 'speech'.
 
-def process_speeches(input_df: pd.DataFrame, senticnet_path: str) -> pd.DataFrame:
-    """
-    Process the speeches in the input dataframe and extract the emotions and polarity using SenticNet.
+        Returns:
+            pd.DataFrame: A dataframe containing the processed speeches.
 
-    :param input_df: The input dataframe containing the speeches. Columns should include 'title', 'speaker', and 'speech'.
-    :param senticnet_path: The path to the SenticNet data.
-    :return: A dataframe containing the processed speeches.
-    """
-    senticnet_data = pd.read_csv(senticnet_path, delimiter="\t")
-    categories = ['INTROSPECTION', 'TEMPER', 'ATTITUDE', 'SENSITIVITY']
+        Example:
+            >>> input_df = pd.DataFrame({'title': ['Title 1', 'Title 2'], 'speaker': ['Speaker 1', 'Speaker 2'], 'speech': ['I am happy', 'I am sad']})
+            >>> processor = SpeechProcessor('data/SenticNet4.txt')
+            >>> processor.process_speeches(input_df)
+                 title    speaker       speech  JOY  POLARITY
+            0  Title 1  Speaker 1  I am happy  0.0  0.500000
+            1  Title 2  Speaker 2    I am sad  0.0 -0.333333
+        """
+        results = []
+        for _, row in tqdm(input_df.iterrows(), total=input_df.shape[0]):
+            speech_processed = nlp(row['speech'])
+            speaker = row['speaker']
+            speech = row['speech']
+            title = row['title']
 
-    results = []
-    for _, row in tqdm(input_df.iterrows(), total=input_df.shape[0]):
-        speech_processed = row['speech_processed']
-        speaker = row['speaker']
-        speech = row['speech']
-        title = row['title']
+            accumulators = {}
+            polaritylist = []
+            for sent in speech_processed.sents:
+                for token in sent:
+                    token_text = token.text.lower()
+                    matching_row = self.senticnet_data[self.senticnet_data['CONCEPT'] == token_text]
+                    if not matching_row.empty:
+                        max_category = matching_row[self.categories].astype(float).idxmax(axis=1).iloc[0]
+                        min_category = matching_row[self.categories].astype(float).idxmin(axis=1).iloc[0]
 
-        accumulators = {}
-        polaritylist = []
-        for sent in speech_processed.sents:
-            for token in sent:
-                token_text = token.text.lower()
-                matching_row = senticnet_data[senticnet_data['CONCEPT'] == token_text]
-                if not matching_row.empty:
-                    max_category = matching_row[categories].astype(float).idxmax(axis=1).iloc[0]
-                    min_category = matching_row[categories].astype(float).idxmin(axis=1).iloc[0]
+                        primary_emotion = matching_row['PRIMARY EMOTION'].iloc[0]
+                        secondary_emotion = matching_row['SECONDARY EMOTION'].iloc[0]
 
-                    primary_emotion = matching_row['PRIMARY EMOTION'].iloc[0]
-                    secondary_emotion = matching_row['SECONDAY EMOTION'].iloc[0]
+                        if pd.isna(primary_emotion):
+                            max_emotion = max_category
+                        else:
+                            max_emotion = f"{max_category}{matching_row['PRIMARY EMOTION'].iloc[0]}"
 
-                    if pd.isna(primary_emotion):
-                        max_emotion = max_category
-                    else:
-                        max_emotion = f"{max_category}{matching_row['PRIMARY EMOTION'].iloc[0]}"
+                        if pd.isna(secondary_emotion):
+                            min_emotion = min_category
+                        else:
+                            min_emotion = f"{min_category}{matching_row['SECONDARY EMOTION'].iloc[0]}"
 
-                    if pd.isna(secondary_emotion):
-                        min_emotion = min_category
-                    else:
-                        min_emotion = f"{min_category}{matching_row['SECONDAY EMOTION'].iloc[0]}"
+                        if max_emotion not in accumulators:
+                            accumulators[max_emotion] = []
+                        if min_emotion not in accumulators:
+                            accumulators[min_emotion] = []
 
-                    if max_emotion not in accumulators:
-                        accumulators[max_emotion] = []
-                    if min_emotion not in accumulators:
-                        accumulators[min_emotion] = []
+                        accumulators[max_emotion].append(matching_row[max_category].iloc[0])
+                        if max_emotion != min_emotion:
+                            accumulators[min_emotion].append(matching_row[min_category].iloc[0])
 
-                    accumulators[max_emotion].append(matching_row[max_category].iloc[0])
-                    if max_emotion != min_emotion:
-                        accumulators[min_emotion].append(matching_row[min_category].iloc[0])
+                        polarity = matching_row["POLARITY INTENSITY"].astype(float).iloc[0]
+                        polaritylist.append(polarity)
 
-                    polarity = matching_row["POLARITY INTENSITY"].astype(float).iloc[0]
-                    polaritylist.append(polarity)
+            emotion_avg = {emotion: sum(values) / len(values) if values else 0 for emotion, values in accumulators.items()}
+            polarity_avg = {"POLARITY": sum(polaritylist) / len(polaritylist) if polaritylist else 0}
 
-        emotion_avg = {emotion: sum(values) / len(values) if values else 0 for emotion, values in accumulators.items()}
-        polarity_avg = {"POLARITY": sum(polaritylist) / len(polaritylist) if polaritylist else 0}
+            result_row = {'title': title, "speaker": speaker, "speech": speech, **emotion_avg, **polarity_avg}
+            results.append(result_row)
 
-        result_row = {'title': title, "speaker": speaker, "speech": speech, **emotion_avg, **polarity_avg}
-        results.append(result_row)
+        results_df = pd.DataFrame(results).fillna(0)
+        results_df = results_df.loc[:, (results_df != 0).any(axis=0)]
 
-    results = pd.DataFrame(results).fillna(0)
-    results = results.loc[:, (results != 0).any(axis=0)]
+        Path("results/speeches_processed.csv").parent.mkdir(parents=True, exist_ok=True)
+        results_df.to_csv('results/speeches_processed.csv', index=False)
+        return results_df
 
-    Path("results/speeches_processed.csv").parent.mkdir(parents=True, exist_ok=True)
-    results.to_csv('results/speeches_processed.csv', index=False)
-    return results
+    def process_texts(self, input_df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Process the texts in the input dataframe and extract the emotions and polarity using SenticNet.
+
+        Args:
+            input_df (pd.DataFrame): The input dataframe containing the texts. Columns should include 'id' and 'text'.
+
+        Returns:
+            pd.DataFrame: A dataframe containing the processed texts with extracted emotions and polarity.
+
+        Example:
+            >>> input_df = pd.DataFrame({'id': [1, 2], 'text': ['I am happy', 'I am sad']})
+            >>> processor = SpeechProcessor('data/SenticNet4.txt')
+            >>> processor.process_texts(input_df)
+               id       text  JOY  POLARITY
+            0   1  I am happy  0.0  0.500000
+            1   2    I am sad  0.0 -0.333333
+        """
+        results = []
+        for _, row in tqdm(input_df.iterrows(), total=input_df.shape[0]):
+            text_id = row['id']
+            text = row['text']
+            text_processed = nlp(text)
+
+            accumulators = {}
+            polaritylist = []
+            for sent in text_processed.sents:
+                for token in sent:
+                    token_text = token.text.lower()
+                    matching_row = self.senticnet_data[self.senticnet_data['CONCEPT'] == token_text]
+                    if not matching_row.empty:
+                        max_category = matching_row[self.categories].astype(float).idxmax(axis=1).iloc[0]
+                        min_category = matching_row[self.categories].astype(float).idxmin(axis=1).iloc[0]
+
+                        primary_emotion = matching_row['PRIMARY EMOTION'].iloc[0]
+                        secondary_emotion = matching_row['SECONDARY EMOTION'].iloc[0]
+
+                        if pd.isna(primary_emotion):
+                            max_emotion = max_category
+                        else:
+                            max_emotion = f"{max_category}{matching_row['PRIMARY EMOTION'].iloc[0]}"
+
+                        if pd.isna(secondary_emotion):
+                            min_emotion = min_category
+                        else:
+                            min_emotion = f"{min_category}{matching_row['SECONDARY EMOTION'].iloc[0]}"
+
+                        if max_emotion not in accumulators:
+                            accumulators[max_emotion] = []
+                        if min_emotion not in accumulators:
+                            accumulators[min_emotion] = []
+
+                        accumulators[max_emotion].append(matching_row[max_category].iloc[0])
+                        if max_emotion != min_emotion:
+                            accumulators[min_emotion].append(matching_row[min_category].iloc[0])
+
+                        polarity = matching_row["POLARITY INTENSITY"].astype(float).iloc[0]
+                        polaritylist.append(polarity)
+
+            emotion_avg = {emotion: sum(values) / len(values) if values else 0 for emotion, values in accumulators.items()}
+            polarity_avg = {"POLARITY": sum(polaritylist) / len(polaritylist) if polaritylist else 0}
+
+            result_row = {'id': text_id, 'text': text, **emotion_avg, **polarity_avg}
+            results.append(result_row)
+
+        results_df = pd.DataFrame(results).fillna(0)
+        results_df = results_df.loc[:, (results_df != 0).any(axis=0)]
+
+        Path("results/processed_texts.csv").parent.mkdir(parents=True, exist_ok=True)
+        results_df.to_csv('results/processed_texts.csv', index=False)
+        return results_df
+
+# Example usage
+# processor = SpeechProcessor('data/SenticNet4.txt')
+# input_df = pd.DataFrame({'title': ['Title 1', 'Title 2'], 'speaker': ['Speaker 1', 'Speaker 2'], 'speech': ['I am happy', 'I am sad']})
+# processed_speeches = processor.process_speeches(input_df)
+# print(processed_speeches)
+
+# input_df = pd.DataFrame({'id': [1, 2], 'text': ['I am happy', 'I am sad']})
+# processed_texts = processor.process_texts(input_df)
+# print(processed_texts)
