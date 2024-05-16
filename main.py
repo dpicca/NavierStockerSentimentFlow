@@ -22,7 +22,7 @@ df = pd.Series(
     ]
 )
 
-SpeechProcessor = SpeechProcessor('senticnet.tsv')
+SpeechProcessor = SpeechProcessor('data/senticnet.tsv')
 processed_df = SpeechProcessor.process_texts(df)
 
 results = sentiment_calculator.calculate_navier_stocker_for_texts(processed_df)

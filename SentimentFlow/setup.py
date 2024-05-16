@@ -1,30 +1,19 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='SentimentFlow',
+    name='NavierStockerSentimentFlow',
     version='0.1',
     packages=find_packages(),
     install_requires=[
         'spacy',
-        'textblob',
-        'spacytextblob',
         'tqdm',
         'numpy',
         'pandas',
-        'seaborn',
-        'matplotlib',
-        'transformers',
-        'torch',
-        'scikit-learn',
+        'scipy',
     ],
-    entry_points={
-        'console_scripts': [
-            'sentimentflow=SentimentFlow.__main__:main',
-        ],
-    },
     author="Your Name",
     author_email="your.email@example.com",
-    description="A package for processing and analyzing sentiment flow in speeches using principles from fluid dynamics.",
+    description="A package for processing and analyzing sentiment flow in texts using principles from fluid dynamics.",
     url="https://github.com/unil-ish/sentimentflow",
     classifiers=[
         "Programming Language :: Python :: 3",
