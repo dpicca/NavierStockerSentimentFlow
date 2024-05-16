@@ -2,6 +2,9 @@ import pandas as pd
 from pathlib import Path
 from tqdm.auto import tqdm
 import spacy
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 # Load the English tokenizer, POS tagger, parser, NER, and word vectors
 nlp = spacy.load("en_core_web_sm")
@@ -37,7 +40,8 @@ class SpeechProcessor:
             1  Title 2  Speaker 2    I am sad  0.0 -0.333333
         """
         results = []
-        for _, row in tqdm(input_df.iterrows(), total=input_df.shape[0]):
+        logging.info("Starting to process")
+        for _, row in tqdm(input_df.iterrows(), total=input_df.shape[0], desc="Processing speeches"):
             speech_processed = nlp(row['speech'])
             speaker = row['speaker']
             speech = row['speech']
@@ -87,32 +91,32 @@ class SpeechProcessor:
         results_df = pd.DataFrame(results).fillna(0)
         results_df = results_df.loc[:, (results_df != 0).any(axis=0)]
 
+        logging.info("Saving results to results/speeches_processed.csv")
         Path("results/speeches_processed.csv").parent.mkdir(parents=True, exist_ok=True)
         results_df.to_csv('results/speeches_processed.csv', index=False)
         return results_df
 
-    def process_texts(self, input_df: pd.DataFrame) -> pd.DataFrame:
+    def process_texts(self, input_series: pd.Series) -> pd.DataFrame:
         """
-        Process the texts in the input dataframe and extract the emotions and polarity using SenticNet.
+        Process the texts in the input series and extract the emotions and polarity using SenticNet.
 
         Args:
-            input_df (pd.DataFrame): The input dataframe containing the texts. Columns should include 'id' and 'text'.
+            input_series (pd.Series): The input series containing the texts.
 
         Returns:
             pd.DataFrame: A dataframe containing the processed texts with extracted emotions and polarity.
 
         Example:
-            >>> input_df = pd.DataFrame({'id': [1, 2], 'text': ['I am happy', 'I am sad']})
+            >>> input_series = pd.Series(['I am happy', 'I am sad'])
             >>> processor = SpeechProcessor('data/SenticNet4.txt')
-            >>> processor.process_texts(input_df)
-               id       text  JOY  POLARITY
-            0   1  I am happy  0.0  0.500000
-            1   2    I am sad  0.0 -0.333333
+            >>> processor.process_texts(input_series)
+                       text  JOY  POLARITY
+            0  I am happy  0.0  0.500000
+            1    I am sad  0.0 -0.333333
         """
         results = []
-        for _, row in tqdm(input_df.iterrows(), total=input_df.shape[0]):
-            text_id = row['id']
-            text = row['text']
+        logging.info("Starting to process")
+        for text in tqdm(input_series,total=len(input_series) , desc="Processing texts"):
             text_processed = nlp(text)
 
             accumulators = {}
@@ -150,15 +154,17 @@ class SpeechProcessor:
                         polarity = matching_row["POLARITY INTENSITY"].astype(float).iloc[0]
                         polaritylist.append(polarity)
 
-            emotion_avg = {emotion: sum(values) / len(values) if values else 0 for emotion, values in accumulators.items()}
+            emotion_avg = {emotion: sum(values) / len(values) if values else 0 for emotion, values in
+                           accumulators.items()}
             polarity_avg = {"POLARITY": sum(polaritylist) / len(polaritylist) if polaritylist else 0}
 
-            result_row = {'id': text_id, 'text': text, **emotion_avg, **polarity_avg}
+            result_row = {'text': text, **emotion_avg, **polarity_avg}
             results.append(result_row)
 
         results_df = pd.DataFrame(results).fillna(0)
         results_df = results_df.loc[:, (results_df != 0).any(axis=0)]
 
+        logging.info("Saving results to results/processed_texts.csv")
         Path("results/processed_texts.csv").parent.mkdir(parents=True, exist_ok=True)
         results_df.to_csv('results/processed_texts.csv', index=False)
         return results_df

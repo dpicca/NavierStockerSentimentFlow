@@ -2,10 +2,14 @@ from pathlib import Path
 
 import numpy as np
 from scipy.integrate import odeint
-from tqdm.notebook import tqdm
+from tqdm.auto import tqdm
 import logging
 import pandas as pd
 from typing import List, Dict, Any
+
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+
 
 from SentimentFlow.senti_keywords import keywords_example
 class SentimentFlowCalculator:
@@ -146,7 +150,8 @@ class SentimentFlowCalculator:
         all_s = {}
         sentiment_columns = data.columns.difference(['title', 'speaker', 'speech', 'POLARITY'])
 
-        for speaker in tqdm(data['speaker'].unique(), desc="Processing speakers"):
+        logging.info("Starting to calculate Navier-Stocker ...")
+        for speaker in tqdm(data['speaker'].unique(),total=len(data['speaker']), desc="Calculating Navier-Stocker for speeches"):
             speaker_data = data[data['speaker'] == speaker]
             title = speaker_data.iloc[0]['title']
             initial_speaker = speaker_data.iloc[0]
@@ -192,63 +197,58 @@ class SentimentFlowCalculator:
                 'simulation': simulation_results,
                 'emotion dimension': sentiment_columns
             })
+        logging.info("Finished calculating speeches.")
+        logging.info(f"Processed {len(all_s)} speeches.")
 
+        # Debug: Save the results to a CSV for inspection
+        logging.info("Saving results to results/navier_stocker_speeches_results.csv")
+        Path("results/navier_stocker_speeches_results.csv").parent.mkdir(parents=True, exist_ok=True)
+        all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
+        all_s_df.to_csv('results/navier_stocker_speeches_results.csv', index=False)
         return all_s
 
     def calculate_navier_stocker_for_texts(self, data: pd.DataFrame) -> Dict[int, List[Dict[str, Any]]]:
         """
-        Calculate the Navier-Stokes sentiment flow for each text in a DataFrame with 'id' and 'text' columns,
-        and additional columns for emotions and polarity.
+        Calculate the Navier-Stokes sentiment flow for each text in a DataFrame with 'text' and emotion columns.
 
         Args:
-            data (pd.DataFrame): DataFrame containing 'id', 'text', and emotion columns.
+            data (pd.DataFrame): DataFrame containing 'text' and emotion columns.
 
         Returns:
             Dict[int, List[Dict[str, Any]]]: Dictionary with simulation results.
         """
         all_s = {}
-        sentiment_columns = data.columns.difference(['id', 'text'])
-
-        for text_id in tqdm(data['id'].unique(), desc="Processing texts"):
-            text_data = data[data['id'] == text_id]
-            if len(text_data) == 0:
-                logging.warning(f"No data found for text ID {text_id}")
-                continue
-
-            text_row = text_data.iloc[0]
-
-            # Debug: Print the sentiment columns and the initial state
-            print("Sentiment Columns:", sentiment_columns)
-            print("Initial State (s0):", text_row[sentiment_columns].apply(pd.to_numeric, errors='coerce').fillna(0).to_numpy())
-
+        sentiment_columns = data.columns.difference(['text'])
+        logging.info("Starting to calculate Navier-Stocker...")
+        for idx, text_row in tqdm(data.iterrows(), total=data.shape[0], desc="Calculating Navier-Stocker for texts"):
+            text = text_row['text']
             s0 = text_row[sentiment_columns].apply(pd.to_numeric, errors='coerce').fillna(0).to_numpy()
             s0_g_context = self._calculate_external_contextual_force(text_row['POLARITY'])
             current_time = 0
             all_results = []
 
             # Debug: Print initial values
-            print(f"Processing text ID {text_id}, Initial s0: {s0}, Initial g_context: {s0_g_context}")
+            #print(f"Processing text index {idx}, Initial s0: {s0}, Initial g_context: {s0_g_context}")
 
-            for i in range(1, len(text_data)):
-                current_text_row = text_data.iloc[i]
-                g_context = self._calculate_external_contextual_force(current_text_row['POLARITY'])
-                current_text = current_text_row['text']
+            # Since we are processing single texts, there will be only one iteration
+            current_text_row = text_row
+            g_context = self._calculate_external_contextual_force(current_text_row['POLARITY'])
 
-                t = np.array([current_time, current_time + 1])
-                speech_info = (
-                    self._calculate_sentiment_density(s0),
-                    np.array([self._calculate_sentiment_pressure(score, current_text) for score in s0]),
-                    self._calculate_sentiment_viscosity(s0),
-                    g_context
-                )
-                s = odeint(self._differential_equation, s0, t, args=(speech_info,))
+            t = np.array([current_time, current_time + 1])
+            speech_info = (
+                self._calculate_sentiment_density(s0),
+                np.array([self._calculate_sentiment_pressure(score, text) for score in s0]),
+                self._calculate_sentiment_viscosity(s0),
+                g_context
+            )
+            s = odeint(self._differential_equation, s0, t, args=(speech_info,))
 
-                all_results.extend((sim_result, current_text) for sim_result in s.tolist())
-                s0 = s[-1]
-                current_time += 1
+            all_results.extend((sim_result, text) for sim_result in s.tolist())
+            s0 = s[-1]
+            current_time += 1
 
-                # Debug: Print intermediate results
-                print(f"Iteration {i}, s0: {s0}, g_context: {g_context}, Current Text: {current_text}")
+            # Debug: Print intermediate results
+            #print(f"Iteration 1, s0: {s0}, g_context: {g_context}, Text: {text}")
 
             if all_results:
                 simulation_results, texts = zip(*all_results)
@@ -256,19 +256,22 @@ class SentimentFlowCalculator:
             else:
                 simulation_results, texts = [], []
 
-            if text_id not in all_s:
-                all_s[text_id] = []
-            all_s[text_id].append({
-                'id': text_id,
+            if idx not in all_s:
+                all_s[idx] = []
+            all_s[idx].append({
                 'text': texts,
                 'simulation': simulation_results,
                 'emotion dimension': sentiment_columns
             })
 
+        logging.info("Finished calculating texts.")
+        logging.info(f"Processed {len(all_s)} texts.")
         # Debug: Save the results to a CSV for inspection
-        Path("results/navier_stocker_results.csv").parent.mkdir(parents=True, exist_ok=True)
+
+        logging.info("Saving results to results/navier_stocker_text_results.csv")
+        Path("results/navier_stocker_text_results.csv").parent.mkdir(parents=True, exist_ok=True)
         all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
-        all_s_df.to_csv('results/navier_stocker_results.csv', index=False)
+        all_s_df.to_csv('results/navier_stocker_text_results.csv', index=False)
 
         return all_s
 

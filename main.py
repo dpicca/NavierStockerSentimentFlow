@@ -7,9 +7,8 @@ from SentimentFlow.data_processing import SpeechProcessor
 
 sentiment_calculator = SentimentFlowCalculator()
 #
-df = pd.DataFrame({
-    'id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    'text': [
+df = pd.Series(
+    [
         'Despite the challenges, I feel quite optimistic about the future and the opportunities it holds.',
         'Today has been a particularly tough day, and I am feeling overwhelmed by everything happening around me.',
         'I am delighted with the progress I have made on my project and look forward to sharing it with my team.',
@@ -21,7 +20,7 @@ df = pd.DataFrame({
         'I feel elated after receiving the news about my promotion; it is a significant milestone in my career.',
         'The uncertainty of the current situation is making me anxious, and I am finding it hard to focus.'
     ]
-})
+)
 
 SpeechProcessor = SpeechProcessor('senticnet.tsv')
 processed_df = SpeechProcessor.process_texts(df)
