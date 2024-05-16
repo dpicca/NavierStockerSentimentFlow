@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 from scipy.integrate import odeint
 from tqdm.notebook import tqdm
@@ -209,12 +211,23 @@ class SentimentFlowCalculator:
 
         for text_id in tqdm(data['id'].unique(), desc="Processing texts"):
             text_data = data[data['id'] == text_id]
+            if len(text_data) == 0:
+                logging.warning(f"No data found for text ID {text_id}")
+                continue
+
             text_row = text_data.iloc[0]
+
+            # Debug: Print the sentiment columns and the initial state
+            print("Sentiment Columns:", sentiment_columns)
+            print("Initial State (s0):", text_row[sentiment_columns].apply(pd.to_numeric, errors='coerce').fillna(0).to_numpy())
 
             s0 = text_row[sentiment_columns].apply(pd.to_numeric, errors='coerce').fillna(0).to_numpy()
             s0_g_context = self._calculate_external_contextual_force(text_row['POLARITY'])
             current_time = 0
             all_results = []
+
+            # Debug: Print initial values
+            print(f"Processing text ID {text_id}, Initial s0: {s0}, Initial g_context: {s0_g_context}")
 
             for i in range(1, len(text_data)):
                 current_text_row = text_data.iloc[i]
@@ -234,8 +247,14 @@ class SentimentFlowCalculator:
                 s0 = s[-1]
                 current_time += 1
 
-            simulation_results, texts = zip(*all_results) if all_results else ([], [])
-            simulation_results = np.vstack(simulation_results) if simulation_results else np.array([])
+                # Debug: Print intermediate results
+                print(f"Iteration {i}, s0: {s0}, g_context: {g_context}, Current Text: {current_text}")
+
+            if all_results:
+                simulation_results, texts = zip(*all_results)
+                simulation_results = np.vstack(simulation_results)
+            else:
+                simulation_results, texts = [], []
 
             if text_id not in all_s:
                 all_s[text_id] = []
@@ -245,6 +264,11 @@ class SentimentFlowCalculator:
                 'simulation': simulation_results,
                 'emotion dimension': sentiment_columns
             })
+
+        # Debug: Save the results to a CSV for inspection
+        Path("results/navier_stocker_results.csv").parent.mkdir(parents=True, exist_ok=True)
+        all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
+        all_s_df.to_csv('results/navier_stocker_results.csv', index=False)
 
         return all_s
 

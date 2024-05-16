@@ -1,6 +1,6 @@
 import pandas as pd
 from pathlib import Path
-from tqdm.notebook import tqdm
+from tqdm.auto import tqdm
 import spacy
 
 # Load the English tokenizer, POS tagger, parser, NER, and word vectors
