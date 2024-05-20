@@ -145,9 +145,7 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 ## Author
 
-Your Name
-[Email](mailto:your.email@example.com)
-[GitHub](https://github.com/unil-ish/sentimentflow)
+Davide Picca
 
 ## Acknowledgements
 
