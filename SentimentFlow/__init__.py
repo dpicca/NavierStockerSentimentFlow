@@ -1,2 +1,3 @@
-from data_processing import SpeechProcessor
-from sentiment_analysis import SpeechProcessor
+from .data_processing import DataProcessor
+from .senti_keywords import KeywordAnalyzer
+from .sentiment_analysis import SentimentAnalyzer
