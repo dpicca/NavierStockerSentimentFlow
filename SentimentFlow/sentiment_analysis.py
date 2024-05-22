@@ -203,7 +203,7 @@ class SentimentFlowCalculator:
         logging.info(f"Processed {len(all_s)} speeches.")
 
         # Debug: Save the results to a CSV for inspection
-        logging.info("Saving results to results/navier_stocker_speeches_results.csv")
+        logging.info("Saving results to results/navier_stocker_speeches_results.json")
         Path("results/navier_stocker_speeches_results.csv").parent.mkdir(parents=True, exist_ok=True)
         processed_df = pd.DataFrame(all_s)
         # Save the DataFrame to a JSON file
@@ -274,7 +274,7 @@ class SentimentFlowCalculator:
         logging.info(f"Processed {len(all_s)} texts.")
         # Debug: Save the results to a CSV for inspection
 
-        logging.info("Saving results to results/navier_stocker_text_results.csv")
+        logging.info("Saving results to results/navier_stocker_text_results.json")
         Path("results/navier_stocker_text_results.csv").parent.mkdir(parents=True, exist_ok=True)
         processed_df = pd.DataFrame(all_s)
 
