@@ -203,8 +203,9 @@ class SentimentFlowCalculator:
         # Debug: Save the results to a CSV for inspection
         logging.info("Saving results to results/navier_stocker_speeches_results.csv")
         Path("results/navier_stocker_speeches_results.csv").parent.mkdir(parents=True, exist_ok=True)
-        all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
-        all_s_df.to_csv('results/navier_stocker_speeches_results.csv', index=False)
+        self.save_all_simspeaker_to_csv(all_s, 'results/navier_stocker_speeches_results.csv')
+        #all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
+        #all_s_df.to_csv('results/navier_stocker_speeches_results.csv', index=False)
         return all_s
 
     def calculate_navier_stocker_for_texts(self, data: pd.DataFrame) -> Dict[int, List[Dict[str, Any]]]:
@@ -270,10 +271,67 @@ class SentimentFlowCalculator:
 
         logging.info("Saving results to results/navier_stocker_text_results.csv")
         Path("results/navier_stocker_text_results.csv").parent.mkdir(parents=True, exist_ok=True)
-        all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
-        all_s_df.to_csv('results/navier_stocker_text_results.csv', index=False)
+        self.save_all_simtext_to_csv(all_s, 'results/navier_stocker_text_results.csv')
+        #all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
+        #all_s_df.to_csv('results/navier_stocker_text_results.csv', index=False)
 
         return all_s
+
+
+    def save_all_simspeaker_to_csv(self,all_s, filename):
+        # Create a list to hold the flattened data
+        flattened_data = []
+
+        # Iterate over each title and its speakers
+        for title, speakers_data in all_s.items():
+            for speaker_data in speakers_data:
+                # Flatten the structure
+                for i, simulation_value in enumerate(speaker_data['simulation']):
+                    flattened_data.append({
+                        'Title': title,
+                        'Speaker': speaker_data['speaker'],
+                        'Speech': speaker_data['speech'][i],
+                        'Time': i,
+                        'Simulation': simulation_value
+                    })
+
+        # Convert to a DataFrame
+        df = pd.DataFrame(flattened_data)
+        # Save to CSV
+        df.to_csv(filename, index=False)
+
+    import pandas as pd
+    from pathlib import Path
+
+    def save_all_simtext_to_csv(self, all_s, filename):
+        # Create a list to hold the flattened data
+        flattened_data = []
+
+        # Iterate over each index and its simulation results
+        for idx, results in all_s.items():
+            for result in results:
+                # Flatten the structure
+                texts = result['text']
+                simulations = result['simulation']
+                emotion_dimensions = result['emotion dimension']
+
+                for i, simulation in enumerate(simulations):
+                    for j, sim_value in enumerate(simulation):
+                        flattened_data.append({
+                            'Index': idx,
+                            'Text': texts[i],
+                            'Emotion Dimension': emotion_dimensions[j],
+                            'Time': i,
+                            'Simulation': sim_value
+                        })
+
+        # Convert to a DataFrame
+        df = pd.DataFrame(flattened_data)
+        # Save to CSV
+        df.to_csv(filename, index=False)
+
+    # Example usage:
+    # self.save_all_navier_stocker_to_csv(all_s, 'results/navier_stocker_text_results.csv')
 
 # Example usage
 # sentiment_calculator = SentimentFlowCalculator(keywords_example)
