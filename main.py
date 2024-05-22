@@ -1,4 +1,6 @@
 #
+import json
+
 import pandas as pd
 
 from SentimentFlow.sentiment_analysis import SentimentFlowCalculator

@@ -1,1 +1,3 @@
-from .plotting import plot_speaker_simulations, plot_highest_avg_dimension
+from .data_processing import SpeechProcessor
+from .sentiment_analysis import SentimentFlowCalculator
+from .senti_keywords import keywords_example
