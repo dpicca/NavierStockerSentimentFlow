@@ -1,3 +1,5 @@
+import csv
+import json
 from pathlib import Path
 
 import numpy as np
@@ -201,10 +203,14 @@ class SentimentFlowCalculator:
         logging.info(f"Processed {len(all_s)} speeches.")
 
         # Debug: Save the results to a CSV for inspection
-        logging.info("Saving results to results/navier_stocker_speeches_results.csv")
+        logging.info("Saving results to results/navier_stocker_speeches_results.json")
         Path("results/navier_stocker_speeches_results.csv").parent.mkdir(parents=True, exist_ok=True)
-        all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
-        all_s_df.to_csv('results/navier_stocker_speeches_results.csv', index=False)
+        processed_df = pd.DataFrame(all_s)
+        # Save the DataFrame to a JSON file
+        json_file_path = 'results/navier_stocker_text_results.json'
+        processed_df.to_json(json_file_path, orient='records', lines=True, indent=4)
+        #all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
+        #all_s_df.to_csv('results/navier_stocker_speeches_results.csv', index=False)
         return all_s
 
     def calculate_navier_stocker_for_texts(self, data: pd.DataFrame) -> Dict[int, List[Dict[str, Any]]]:
@@ -268,12 +274,20 @@ class SentimentFlowCalculator:
         logging.info(f"Processed {len(all_s)} texts.")
         # Debug: Save the results to a CSV for inspection
 
-        logging.info("Saving results to results/navier_stocker_text_results.csv")
+        logging.info("Saving results to results/navier_stocker_text_results.json")
         Path("results/navier_stocker_text_results.csv").parent.mkdir(parents=True, exist_ok=True)
-        all_s_df = pd.DataFrame.from_dict(all_s, orient='index')
-        all_s_df.to_csv('results/navier_stocker_text_results.csv', index=False)
+        processed_df = pd.DataFrame(all_s)
+
+        # Save the DataFrame to a JSON file
+        json_file_path = 'results/navier_stocker_text_results.json'
+        processed_df.to_json(json_file_path, orient='records', lines=True, indent=4)
 
         return all_s
+
+
+
+    # Example usage:
+    # self.save_all_navier_stocker_to_csv(all_s, 'results/navier_stocker_text_results.csv')
 
 # Example usage
 # sentiment_calculator = SentimentFlowCalculator(keywords_example)
