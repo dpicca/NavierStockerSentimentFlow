@@ -12,7 +12,7 @@ NavierStockerSentimentFlow is a Python package designed for processing and analy
 You can install the package via pip:
 
 ```sh
-pip install git+https://github.com/unil-ish/SentimentFlow
+pip install git+https://github.com/dpicca/SentimentFlow
 ```
 
 ## Dependencies
