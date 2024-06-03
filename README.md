@@ -15,6 +15,8 @@ You can install the package via pip:
 pip install git+https://github.com/dpicca/SentimentFlow
 ```
 
+You also need Senticnet. You can find a copy here: [https://zenodo.org/records/11449904](https://zenodo.org/records/11449904)
+
 ## Dependencies
 
 - `spacy`
