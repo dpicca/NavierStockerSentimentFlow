@@ -9,13 +9,14 @@ NavierStockerSentimentFlow is a Python package designed for processing and analy
 
 ## Installation
 
-You can install the package via pip:
+* You can install the package via pip:
 
 ```sh
 pip install git+https://github.com/dpicca/SentimentFlow
 ```
 
-You also need Senticnet. You can find a copy here: [https://zenodo.org/records/11449904](https://zenodo.org/records/11449904)
+* You also need [Senticnet](https://sentic.net/downloads/) (Choose the file based on your language).
+    * You can find a copy for English here: [https://zenodo.org/records/11449904](https://zenodo.org/records/11449904)
 
 ## Dependencies
 
